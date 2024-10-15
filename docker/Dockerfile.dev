@@ -1,0 +1,16 @@
+FROM node:20.18.0-alpine3.20
+
+RUN apk add openssl
+RUN apk add bash
+
+# Wait-for-it alpine compatible version
+ADD https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh /opt/bin/
+RUN chmod +x /opt/bin/wait-for-it.sh
+
+WORKDIR /app
+COPY . /app
+
+EXPOSE 3000
+
+RUN chmod +x ./docker/setup.sh
+CMD ./docker/setup.sh

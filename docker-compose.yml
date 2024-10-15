@@ -1,0 +1,35 @@
+services:
+  qik_postgres.postgres:
+    container_name: qik_postgres
+    networks:
+      - qiktaxi_net
+    image: postgres:14.1-alpine3.14
+    # volumes:
+    #   - ./_cache/postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: 'password'
+      POSTGRES_USER: postgres
+      POSTGRES_DB: 'qik_taxidb'
+      PGDATA: '/var/lib/postgresql/data'
+    ports:
+      - 5432:5432
+
+  qiktaxi.service:
+    container_name: qiktaxi_service
+    networks:
+      - qiktaxi_net
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.dev
+    image: qiktaxi_service
+    volumes:
+      - .:/app
+      - /app/node_modules/
+    ports:
+      - 3000:3000
+    depends_on:
+      - qik_postgres.postgres
+
+networks:
+  qiktaxi_net:
+    name: qiktaxi_net

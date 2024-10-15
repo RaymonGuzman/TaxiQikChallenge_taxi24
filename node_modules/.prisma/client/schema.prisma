@@ -1,0 +1,155 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Brand {
+  id       Int       @id @default(autoincrement())
+  name     String
+  logo     String
+  vehicles Vehicle[]
+
+  @@map("brands")
+}
+
+model Company {
+  id        Int       @id @default(autoincrement())
+  name      String
+  rnc       Int       @unique
+  status    String
+  address   String
+  drivers   Driver[]
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
+
+  @@map("companies")
+}
+
+model Passenger {
+  id           Int           @id @default(autoincrement())
+  firstName    String        @map("first_name")
+  lastName     String        @map("last_name")
+  email        String
+  phone        String
+  document     String
+  documentType DocumentTypes @map("document_type")
+  trips        Trip[]
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
+
+  @@map("passengers")
+}
+
+model Driver {
+  id           Int          @id @default(autoincrement())
+  firstName    String       @map("first_name")
+  lastName     String       @map("last_name")
+  email        String       @unique
+  phone        String
+  companyId    Int          @map("company_id")
+  document     String       @unique
+  documentType String       @map("document_type")
+  picture      String?
+  currentLat   Float?       @map("current_lat")
+  currentLon   Float?       @map("current_lon")
+  status       DriverStatus
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
+
+  company   Company  @relation(fields: [companyId], references: [id])
+  trips     Trip[]
+  vehicle   Vehicle?
+  vehicleId Int?     @unique @map("vehicle_id")
+
+  @@map("drivers")
+}
+
+model Trip {
+  id            Int         @id @default(autoincrement())
+  driverId      Int         @map("driver_id")
+  passengerId   Int
+  status        TripsStatus
+  fromLatitude  Float       @map("from_latitude")
+  fromLongitude Float       @map("from_longitude")
+  toLatitude    Float       @map("to_latitude")
+  toLongitude   Float       @map("to_longitude")
+  createdAt     DateTime    @default(now()) @map("created_at")
+  startedAt     DateTime?   @map("started_at")
+  endedAt       DateTime?   @map("ended_at")
+  cancelledAt   DateTime?   @map("cancelle_at")
+
+  Invoice   Invoice?
+  Passenger Passenger @relation(fields: [passengerId], references: [id])
+  Driver    Driver    @relation(fields: [driverId], references: [id])
+
+  @@map("trips")
+}
+
+model Vehicle {
+  id       Int    @id @default(autoincrement())
+  driverId Int?   @unique @map("driver_id")
+  color    String
+  brandId  Int    @map("brand_id")
+  vin      String @unique
+  year     Int
+
+  brand  Brand   @relation(fields: [brandId], references: [id])
+  driver Driver? @relation(fields: [driverId], references: [id])
+
+  @@map("vehicles")
+}
+
+model Invoice {
+  id            Int           @id @default(autoincrement())
+  tripId        Int           @unique @map("trip_id")
+  taxes         Float
+  amount        Float
+  status        String
+  paymentMethod PaymentMethod @map("payment_method")
+  createdAt     DateTime      @default(now()) @map("created_at")
+
+  trip Trip @relation(fields: [tripId], references: [id])
+
+  @@map("invoices")
+}
+
+enum InvoiceStatus {
+  OPEN
+  CANCELLED
+  PAID
+}
+
+enum PaymentMethod {
+  CASH
+  CARD
+}
+
+enum TripsStatus {
+  REQUESTED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+enum DriverStatus {
+  PENDING
+  ACTIVE
+  INACTIVE
+  ONLINE
+  BUSY
+}
+
+enum DocumentTypes {
+  C
+  P
+  L
+}
