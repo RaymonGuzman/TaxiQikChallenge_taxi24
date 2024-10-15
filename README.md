@@ -1,13 +1,27 @@
 # TaxiQikChallenge
 
-# Lo primero que vamos a hacer es verificar si tenemos docker y docker compose instalado. Para esto podemos ejecutar el siguiente comando
-docker -v
-Docker version 27.3.1, build ce12230
+## Table of Content
+- [Instalación](#Instalación)
+- [Usage](#Usage)
 
+## Instalación
+
+
+#### Lo primero que vamos a hacer es verificar si tenemos docker y docker compose instalado. Para esto podemos ejecutar el siguiente comando
+```bash
+docker -v
+# Docker version 27.3.1, build ce12230
+```
+
+
+```bash
 docker compose version
 # Docker Compose version v2.29.7
+```
 
---
+
+
+
 
 Configurando el ambiente
 # Lo siguiente es configurar el .env, para esto ejecutarmos el siguiente comando dentro de la carpeta del proyecto
