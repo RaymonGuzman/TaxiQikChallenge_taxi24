@@ -66,27 +66,33 @@ yarn install o npm install
 --
 
 
-### Uso de la API
+## Uso de la API
 
 ##### Puedes testear la API usando POSTMAN, también puedes testearla a través de la consola con el comando curl, a continuación algunos ejemplos:
 ##### Para conductores
-Drivers - GET 
 
-##### Para obtener todos los conductores
-/drivers
+###### Drivers - GET
+###### /drivers
+Para obtener todos los conductores
+```bash
 curl --location 'http://localhost:3000/drivers'
-
+```
+###### Drivers - GET
+###### /drivers/:id
 ##### Para obtener un conducto en específico por su id
-/drivers/:id
+```bash
 curl --location 'http://localhost:3000/drivers/1'
-
+```
 ##### Para obtener los conductores por su estado
 /drivers?status=(PENDING, ACTIVE, INACTIVE, ONLINE, BUSY)
 curl --location 'http://localhost:3000/drivers?status=PENDING'
 
 
+
+###### Drivers - POST
+###### /drivers
 ##### A continuación el endpoint para crear un coonductor
-/drivers - POST
+```bash
 curl --location 'http://localhost:3000/drivers' \
 --header 'Content-Type: application/json' \
 --data '{
@@ -101,15 +107,17 @@ curl --location 'http://localhost:3000/drivers' \
       "currentLon": -69.93607038842656,
       "vehicleId": 1
 }'
+``` 
 
---
 
-Passenger
-/passenger - GET
+### Passenger
 
+###### Passenger - GET
+###### /passenger
 ##### Para obtener todos los pasajeros
+```bash
 curl --location 'http://localhost:3000/passengers'
-
+```
 ##### Para obtener un pasajero por su id
 /passengers/:id
 curl --location 'http://localhost:3000/passengers/1'
