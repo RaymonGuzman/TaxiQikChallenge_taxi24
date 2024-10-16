@@ -118,15 +118,18 @@ curl --location 'http://localhost:3000/drivers' \
 ```bash
 curl --location 'http://localhost:3000/passengers'
 ```
-##### Para obtener un pasajero por su id
-/passengers/:id
+
+##### /passengers/:id
+#### Para obtener un pasajero por su id
+```bash
 curl --location 'http://localhost:3000/passengers/1'
-
+```
+###### GET - /passengers/trip?:param1&:parama2&param3
+##### /passengers/trip?latitude=(longitude)&longitude=(latitude)&distance=(distance in km)
 #### Para obtener los conductores cerca de ese pasajero, en este caso, cerca de esa longitud y latitud
-/passengers/trip?latitude=(longitude)&longitude=(latitude)&distance=(distance in km)
+```bash
 curl --location 'http://localhost:3000/passengers/trip?latitude=18.480023716974017&longitude=-69.89138258140852&distance=3'
-
---
+```
 
 
 ### Trips
@@ -157,5 +160,4 @@ curl --location 'http://localhost:3000/trips/request' \
 #### Para actualizar un viaje
 ```bash
 curl --location --request PUT 'http://localhost:3000/trips/2/COMPLETED'
-```
 ```
