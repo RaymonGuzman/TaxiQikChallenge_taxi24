@@ -128,14 +128,18 @@ curl --location 'http://localhost:3000/passengers/trip?latitude=18.4800237169740
 
 --
 
-#### Para obtener todos los viajes
-Trips
-/trips - GET
-/trips?status=REQUESTED,IN_PROGRESS
-curl --location 'http://localhost:3000/trips?status=REQUESTED,IN_PROGRESS'
 
+### Trips
+###### trips - GET
+###### /trips?status=REQUESTED,IN_PROGRESS
+#### Para obtener todos los viajes
+```bash
+curl --location 'http://localhost:3000/trips?status=REQUESTED,IN_PROGRESS'
+```
+
+###### /trips/request - POST
 #### Método POST con el body para crear un viaje, en el postman collection se debe de seleccionar el content-type: Application/json en la parte de headers
-/trips/request - POST
+```bash
 curl --location 'http://localhost:3000/trips/request' \
 --header 'Content-Type: application/json' \
 --data '{
@@ -146,8 +150,12 @@ curl --location 'http://localhost:3000/trips/request' \
     "toLatitude": 18.463101265411417,
     "toLongitude": -69.96723786741612
 }'
+```
 
+##### /trips - PUT
+##### /trips/:id/:status=(REQUESTED, IN_PROGRESS, COMPLETED, CANCELLED)
 #### Para actualizar un viaje
-/trips - PUT
-/trips/:id/:status=(REQUESTED, IN_PROGRESS, COMPLETED, CANCELLED)
+```bash
 curl --location --request PUT 'http://localhost:3000/trips/2/COMPLETED'
+```
+```
