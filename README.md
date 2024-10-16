@@ -1,9 +1,13 @@
 # TaxiQikChallenge
 
 ## Table of contents  
-1. [Instalación](#Instalación)
-    1. [Configuración del ambiente](#Configuración-del-ambiente) 
-3. [Uso de la API](#Uso-de-la-API)  
+- [Instalación](#Instalación)
+    * [Configuración del ambiente](#Configuración-del-ambiente) 
+- [Uso de la API](#Uso-de-la-API)
+    * [Drivers](#Drivers)
+    * [Passenger](#Passenger)
+    * [Trips](#Trips)
+      
 
 
 
@@ -34,7 +38,9 @@ cp .env.example .env
 ```
 
 #### A esto le debemos agregar los mismo datos para la conexión que hemos colocado en nuestro Docker Compose .yml
-#este por ejemplo es el que utilizo yo DATABASE_URL="postgresql://postgres:password@qik_postgres.postgres:5432/qik_taxidb?schema=public"
+```bash
+DATABASE_URL="postgresql://postgres:password@qik_postgres.postgres:5432/qik_taxidb?schema=public"
+```
 
 #### Dependiendo del sistema operativo que poseas, será necesario que le des permiso de ejecución al setup script
 
@@ -59,17 +65,18 @@ docker ps
 docker exec -it <Nombre del Contenedor> ash
 ```
 
-#Luego en la carpeta raíz del proyecto ejecutamos:
+#### Luego en la carpeta raíz del proyecto ejecutamos:
 ```bash
 yarn install o npm install
 ```
---
 
 
 ## Uso de la API
 
 ##### Puedes testear la API usando POSTMAN, también puedes testearla a través de la consola con el comando curl, a continuación algunos ejemplos:
 ##### Para conductores
+
+### Drivers
 
 ###### Drivers - GET
 ###### /drivers
@@ -83,9 +90,13 @@ curl --location 'http://localhost:3000/drivers'
 ```bash
 curl --location 'http://localhost:3000/drivers/1'
 ```
-##### Para obtener los conductores por su estado
-/drivers?status=(PENDING, ACTIVE, INACTIVE, ONLINE, BUSY)
+
+###### Drivers - GET
+##### /drivers?status=(PENDING, ACTIVE, INACTIVE, ONLINE, BUSY)
+#### Para obtener los conductores por su estado
+```bash
 curl --location 'http://localhost:3000/drivers?status=PENDING'
+```
 
 
 
@@ -133,6 +144,7 @@ curl --location 'http://localhost:3000/passengers/trip?latitude=18.4800237169740
 
 
 ### Trips
+
 ###### trips - GET
 ###### /trips?status=REQUESTED,IN_PROGRESS
 #### Para obtener todos los viajes
