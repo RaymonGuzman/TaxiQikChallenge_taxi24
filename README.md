@@ -28,30 +28,41 @@ docker compose version
 
 ### Configuración del ambiente
 ##### Lo siguiente es configurar el .env, para esto ejecutarmos el siguiente comando dentro de la carpeta del proyecto
+
+```bash
 cp .env.example .env
+```
 
 #### A esto le debemos agregar los mismo datos para la conexión que hemos colocado en nuestro Docker Compose .yml
 #este por ejemplo es el que utilizo yo DATABASE_URL="postgresql://postgres:password@qik_postgres.postgres:5432/qik_taxidb?schema=public"
 
-#Dependiendo del sistema operativo que poseas, será necesario que le des permiso de ejecución al setup script
-chmod +x ./docker/service/setup.sh
+#### Dependiendo del sistema operativo que poseas, será necesario que le des permiso de ejecución al setup script
 
+```bash
+chmod +x ./docker/service/setup.sh
+```
 --
 
 #### Ahora procederemos a ejecutar los servicios con Docker, para esto ejecutamos el siguiente comando:
+
+```bash
 docker compose up -d --build
+```
 
-#Luego de que se construyan los contenederos y los mismos estén arriba, podemos verlo con el siguiente comando:
+#### Luego de que se construyan los contenederos y los mismos estén arriba, podemos verlo con el siguiente comando:
+```bash
 docker ps
+```
 
-#Podemos acceder dentro del contenedor con el siguiente comando:
+#### Podemos acceder dentro del contenedor con el siguiente comando:
+```bash
 docker exec -it <Nombre del Contenedor> ash
-
---
+```
 
 #Luego en la carpeta raíz del proyecto ejecutamos:
+```bash
 yarn install o npm install
-
+```
 --
 
 
