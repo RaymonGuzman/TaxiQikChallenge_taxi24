@@ -167,8 +167,8 @@ curl --location 'http://localhost:3000/trips/request' \
 }'
 ```
 
-##### /trips - PUT
-##### /trips/:id/:status=(REQUESTED, IN_PROGRESS, COMPLETED, CANCELLED)
+###### /trips - PUT
+###### /trips/:id/:status=(REQUESTED, IN_PROGRESS, COMPLETED, CANCELLED)
 #### Para actualizar un viaje
 ```bash
 curl --location --request PUT 'http://localhost:3000/trips/2/COMPLETED'
