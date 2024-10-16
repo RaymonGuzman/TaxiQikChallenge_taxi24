@@ -1,8 +1,11 @@
 # TaxiQikChallenge
 
-## Table of Content
-- [Instalación](#Instalación)
-- [Usage](#Usage)
+## Table of contents  
+1. [Instalación](#Instalación)
+    1. [Configuración del ambiente](#Configuración-del-ambiente) 
+3. [Uso de la API](#Uso-de-la-API)  
+
+
 
 ## Instalación
 
@@ -23,11 +26,11 @@ docker compose version
 
 
 
-Configurando el ambiente
-# Lo siguiente es configurar el .env, para esto ejecutarmos el siguiente comando dentro de la carpeta del proyecto
+### Configuración del ambiente
+##### Lo siguiente es configurar el .env, para esto ejecutarmos el siguiente comando dentro de la carpeta del proyecto
 cp .env.example .env
 
-# A esto le debemos agregar los mismo datos para la conexión que hemos colocado en nuestro Docker Compose .yml
+#### A esto le debemos agregar los mismo datos para la conexión que hemos colocado en nuestro Docker Compose .yml
 #este por ejemplo es el que utilizo yo DATABASE_URL="postgresql://postgres:password@qik_postgres.postgres:5432/qik_taxidb?schema=public"
 
 #Dependiendo del sistema operativo que poseas, será necesario que le des permiso de ejecución al setup script
@@ -35,7 +38,7 @@ chmod +x ./docker/service/setup.sh
 
 --
 
-# Ahora procederemos a ejecutar los servicios con Docker, para esto ejecutamos el siguiente comando:
+#### Ahora procederemos a ejecutar los servicios con Docker, para esto ejecutamos el siguiente comando:
 docker compose up -d --build
 
 #Luego de que se construyan los contenederos y los mismos estén arriba, podemos verlo con el siguiente comando:
@@ -52,10 +55,10 @@ yarn install o npm install
 --
 
 
-Documentación de la API
+### Uso de la API
 
-#Puedes testear la API usando POSTMAN, también puedes testearla a través de la consola con el comando curl, a continuación algunos ejemplos:
-#Para conductores
+#### Puedes testear la API usando POSTMAN, también puedes testearla a través de la consola con el comando curl, a continuación algunos ejemplos:
+##### Para conductores
 Drivers - GET 
 
 #Para obtener todos los conductores
