@@ -6,36 +6,20 @@ async function main() {
   const currentDate = new Date()
   const plus1hourDate = new Date(currentDate.getTime() + (60 * 60 * 1000))
 
-  // Marcas
-  await prisma.brand.createMany({
-    data: [
-      {
-        logo: "https://www.car-logos.org/wp-content/uploads/2011/09/abarth1.png",
-        name: "Abarth"
-      },
-      {
-        logo: "https://www.car-logos.org/wp-content/uploads/2011/09/audi1.png",
-        name: "Audi"
-      },
-      {
-        logo: "https://www.car-logos.org/wp-content/uploads/2011/09/ford1.png",
-        name: "Ford"
-      },
-    ],
-  })
-
   // Companies
   await prisma.company.createMany({
     data: [
       {
+        id: 1,
         name: "Transporte Ejecutivos S.A.",
-        rnc: 3456789,
+        rnc: 23456789,
         status: "ACTIVE",
         address: "Av. Winston Churchill, Santo Domingo, República Dominicana",
       },
       {
+        id:2,
         name: "Taxi Rapido S.R.L.",
-        rnc: 3456790,
+        rnc: 13456790,
         status: "ACTIVE",
         address: "Calle 50, Bella Vista, Santo Domingo, República Dominicana",
       },
@@ -65,10 +49,50 @@ async function main() {
     },
   })
 
+  // Vehicles
+  await prisma.vehicle.createMany({
+    data: [
+      {
+        id: 1,
+        name: "Daihatsu",
+        model: "Mira",
+        color: "Rojo",
+        year: 2021,
+        plateNumber: "A1234"
+      },
+      {
+        id: 2,
+        name: "Honda",
+        model: "Fit",
+        color: "Azul",
+        year: 2017,
+        plateNumber: "A1235"
+      },
+      {
+        id: 3,
+        name: "Suzuki",
+        model: "Swift",
+        color: "Blanco",
+        year: 2019,
+        plateNumber: "A1236"
+      },
+      {
+        id: 4,
+        name: "Toyota",
+        model: "Vitz",
+        color: "Negro",
+        year: 2023,
+        plateNumber: "A1237"
+      },
+    ],
+  })
+
   // Conductores
   await prisma.driver.createMany({
     data: [
       {
+        id: 1,
+        vehicleId: 1,
         firstName: "Carlos",
         lastName: "Gómez",
         email: "carlos.gomez@transportes.com",
@@ -79,9 +103,10 @@ async function main() {
         status: "ACTIVE",
         currentLat: 18.460849695987598, // La USAD de la Máximo Gómez 
         currentLon: -69.920673029112,
-        vehicleId: 1,
       },
       {
+        id: 2,
+        vehicleId: 2,
         firstName: "Pedro",
         lastName: "Martínez",
         email: "pedro.martinez@taxirapido.com",
@@ -92,9 +117,10 @@ async function main() {
         status: "ACTIVE",
         currentLat: 18.482678066040734, // Agora Mall
         currentLon: -69.93907456345791,
-        vehicleId: 2,
       },
       {
+        id: 3,
+        vehicleId: 3,
         firstName: "Luis",
         lastName: "Rodríguez",
         email: "luis.rodriguez@transportes.com",
@@ -105,9 +131,10 @@ async function main() {
         status: "ACTIVE",
         currentLat: 18.461638480046954, // Plaza Lama
         currentLon: -69.93607038842656,
-        vehicleId: 3,
       },
       {
+        id: 4,
+        vehicleId: 4,
         firstName: "Jorge",
         lastName: "Ramírez",
         email: "jorge.ramirez@taxirapido.com",
@@ -118,44 +145,11 @@ async function main() {
         status: "INACTIVE",
         currentLat: 0,
         currentLon: 0,
-        vehicleId: 4,
       },
     ],
   })
 
-  // Vehicles
-  await prisma.vehicle.createMany({
-    data: [
-      {
-        driverId: 1,
-        color: "Rojo",
-        brandId: 1,
-        vin: "VIN123456781",
-        year: 2021,
-      },
-      {
-        driverId: 2,
-        color: "Azul",
-        brandId: 2,
-        vin: "VIN10006782",
-        year: 2017,
-      },
-      {
-        driverId: 3,
-        color: "Blanco",
-        brandId: 3,
-        vin: "VIN123456783",
-        year: 2019,
-      },
-      {
-        driverId: 4,
-        color: "Negro",
-        brandId: 2,
-        vin: "VIN10006784",
-        year: 2023,
-      },
-    ],
-  })
+
 
   // Trips
   const trip1 = await prisma.trip.create({
@@ -211,7 +205,7 @@ async function main() {
   })
 
   // Facturas
-  await prisma.invoice.create({
+  await prisma.receipt.create({
     data: {
       tripId: trip1.id,
       amount: 150.0,
@@ -221,7 +215,7 @@ async function main() {
     },
   })
 
-  await prisma.invoice.create({
+  await prisma.receipt.create({
     data: {
       tripId: trip3.id,
       amount: 300.0,
@@ -231,7 +225,7 @@ async function main() {
     },
   })
 
-  await prisma.invoice.create({
+  await prisma.receipt.create({
     data: {
       tripId: trip4.id,
       amount: 250.0,
@@ -241,7 +235,7 @@ async function main() {
     },
   })
 
-  await prisma.invoice.create({
+  await prisma.receipt.create({
     data: {
       tripId: trip2.id,
       amount: 200.0,
