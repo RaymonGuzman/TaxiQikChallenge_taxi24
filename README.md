@@ -7,6 +7,7 @@
     * [Drivers](#Drivers)
     * [Passenger](#Passenger)
     * [Trips](#Trips)
+    * [Receipts](#Receipts)
       
 
 
@@ -173,3 +174,20 @@ curl --location 'http://localhost:3000/trips/request' \
 ```bash
 curl --location --request PUT 'http://localhost:3000/trips/2/COMPLETED'
 ```
+
+
+### Receipts
+###### /receipts - POST
+#### Método POST con el body para crear una facturación, en el postman collection se debe de seleccionar el content-type: Application/json en la parte de headers
+```bash
+curl --location 'http://localhost:3000/trips/request' \
+--header 'Content-Type: application/json' \
+--data '{
+    "tripId": 1,
+    "taxes": 2,
+    "amount": 18.45256586581231,
+    "status": "PENDING",
+    "paymentMethod": "CASH"
+}'
+```
+
