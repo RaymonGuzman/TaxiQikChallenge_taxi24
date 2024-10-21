@@ -22,6 +22,7 @@ export class CoordinatesQuery {
 }
 
 export class CreateDriverDto {
+  vehicleId: number
   firstName: string
   lastName: string
   email: string
@@ -33,5 +34,4 @@ export class CreateDriverDto {
   currentLat: number
   currentLon: number
   status?: DriverStatus
-  vehicleId?: number
 }

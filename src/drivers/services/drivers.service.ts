@@ -13,7 +13,7 @@ export class DriversService {
       where: { status },
       include: {
         company: false,
-        vehicle: true,
+        Vehicle: true,
         trips: true
       }
     })
@@ -25,7 +25,7 @@ export class DriversService {
     const driver = await this.db.driver.findUnique({
       where: { id },
       include: {
-        company: true, vehicle: { include: { brand: true } }
+        company: true, Vehicle: true
       }
     })
 
@@ -49,6 +49,7 @@ export class DriversService {
   async create(driver: CreateDriverDto): Promise<Driver> {
     return this.db.driver.create({
       data: {
+        vehicleId: driver.vehicleId,
         firstName: driver.firstName,
         lastName: driver.lastName,
         email: driver.email,
@@ -59,7 +60,6 @@ export class DriversService {
         currentLat: driver.currentLat,
         currentLon: driver.currentLon,
         status: driver.status as DriverStatus,
-        vehicleId: driver.vehicleId
       },
     })
   }
