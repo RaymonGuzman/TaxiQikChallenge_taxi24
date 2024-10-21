@@ -10,15 +10,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Brand {
-  id       Int       @id @default(autoincrement())
-  name     String
-  logo     String
-  vehicles Vehicle[]
-
-  @@map("brands")
-}
-
 model Company {
   id        Int       @id @default(autoincrement())
   name      String
@@ -50,6 +41,7 @@ model Passenger {
 
 model Driver {
   id           Int          @id @default(autoincrement())
+  vehicleId    Int         @map("vehicle_id")
   firstName    String       @map("first_name")
   lastName     String       @map("last_name")
   email        String       @unique
@@ -67,8 +59,7 @@ model Driver {
 
   company   Company  @relation(fields: [companyId], references: [id])
   trips     Trip[]
-  vehicle   Vehicle?
-  vehicleId Int?     @unique @map("vehicle_id")
+  Vehicle Vehicle?     @relation(fields: [vehicleId], references: [id])
 
   @@map("drivers")
 }
@@ -87,7 +78,7 @@ model Trip {
   endedAt       DateTime?   @map("ended_at")
   cancelledAt   DateTime?   @map("cancelle_at")
 
-  Invoice   Invoice?
+  Receipt   Receipt?
   Passenger Passenger @relation(fields: [passengerId], references: [id])
   Driver    Driver    @relation(fields: [driverId], references: [id])
 
@@ -97,18 +88,17 @@ model Trip {
 model Vehicle {
   id       Int    @id @default(autoincrement())
   driverId Int?   @unique @map("driver_id")
-  color    String
-  brandId  Int    @map("brand_id")
-  vin      String @unique
-  year     Int
+  name     String?
+  model    String?
+  color    String?
+  year     Int?
 
-  brand  Brand   @relation(fields: [brandId], references: [id])
-  driver Driver? @relation(fields: [driverId], references: [id])
-
+  plateNumber String @map("plate_number") @unique
   @@map("vehicles")
+  Driver Driver[]
 }
 
-model Invoice {
+model Receipt {
   id            Int           @id @default(autoincrement())
   tripId        Int           @unique @map("trip_id")
   taxes         Float
@@ -119,10 +109,10 @@ model Invoice {
 
   trip Trip @relation(fields: [tripId], references: [id])
 
-  @@map("invoices")
+  @@map("receipt")
 }
 
-enum InvoiceStatus {
+enum ReceiptStatus {
   OPEN
   CANCELLED
   PAID
