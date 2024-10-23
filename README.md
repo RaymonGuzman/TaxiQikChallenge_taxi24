@@ -190,4 +190,6 @@ curl --location 'http://localhost:3000/trips/request' \
     "paymentMethod": "CASH"
 }'
 ```
+### Módelo de Entidad Relaciones
+![image](https://github.com/user-attachments/assets/b1e46eb6-6ab1-45c6-81bf-4b25b1ec6e65)
 
