@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { CreateReceiptDto } from '../dto/receipt.dto/receipt.dto';
 // import { PaymentMethod, Receipt, ReceiptStatus } from '@prisma/client';
-import { PaymentMethod, Receipt } from '@prisma/client';
+import { PaymentMethod, Receipt, ReceiptStatus } from '@prisma/client';
 import { DatabaseService } from '../../database/database.service';
 
 
@@ -14,9 +14,9 @@ export class ReceiptsService {
                 tripId: receipts.tripId,
                 taxes,
                 amount,
-                // status: receipts.status as ReceiptStatus,
-                status: receipts.status,
-                paymentMethod: receipts.paymentMethod as PaymentMethod
+                status: receipts.status as ReceiptStatus,
+                paymentMethod: receipts.paymentMethod as PaymentMethod,
+                notes: receipts.notes
             }
         })
     }
