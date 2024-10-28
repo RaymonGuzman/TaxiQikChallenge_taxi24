@@ -212,6 +212,7 @@ async function main() {
       taxes: 27.0,
       status: "PAID",
       paymentMethod: "CASH",
+      notes:'none'
     },
   })
 
@@ -222,6 +223,7 @@ async function main() {
       taxes: 54.0,
       status: "PENDING",
       paymentMethod: "CASH",
+      notes:'none'
     },
   })
 
@@ -232,6 +234,7 @@ async function main() {
       taxes: 45.0,
       status: "PENDING",
       paymentMethod: "CARD",
+      notes:'none'
     },
   })
 
@@ -242,6 +245,7 @@ async function main() {
       taxes: 36.0,
       status: "CANCELLED",
       paymentMethod: "CARD",
+      notes:'none'
     },
   })
 
