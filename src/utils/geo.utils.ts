@@ -9,7 +9,17 @@ export class Geo {
    * @param lon2 Longitude of the destination point in degrees.
    * @returns Distance between the two points in kilometers.
    */
-  static calculateDistance(lat1: number, lon1: number, lat2: number, lon2: number): number {
+  static calculateDistance(
+    lat1: number | undefined,
+    lon1: number | undefined,
+    lat2: number | undefined,
+    lon2: number | undefined
+  ): number {
+
+    if (lat1 === undefined || lon1 === undefined || lat2 === undefined || lon2 === undefined) {
+      return NaN; // or throw new Error('Coordinates cannot be undefined');
+    }
+
     // Convert degrees to radians
     const lat1Rad = this.degreesToRadians(lat1);
     const lon1Rad = this.degreesToRadians(lon1);
