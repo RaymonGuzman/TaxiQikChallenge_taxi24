@@ -16,4 +16,6 @@ export class CreateReceiptDto {
     status: string
     
     paymentMethod: string
+
+    notes:string
 }
