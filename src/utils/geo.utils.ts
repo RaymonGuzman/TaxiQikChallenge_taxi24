@@ -10,14 +10,18 @@ export class Geo {
    * @returns Distance between the two points in kilometers.
    */
   static calculateDistance(
-    lat1: number | undefined,
-    lon1: number | undefined,
-    lat2: number | undefined,
-    lon2: number | undefined
+    lat1: number | undefined | null,
+    lon1: number | undefined | null,
+    lat2: number | undefined | null,
+    lon2: number | undefined | null
   ): number {
 
-    if (lat1 === undefined || lon1 === undefined || lat2 === undefined || lon2 === undefined) {
-      return NaN; // or throw new Error('Coordinates cannot be undefined');
+    if (lat1 === undefined || lat1 === null
+      || lon1 === undefined || lon1 === null
+      || lat2 === undefined || lat2 === null
+      || lon2 === undefined || lon2 === null) {
+      // return NaN; // or throw new Error('Coordinates cannot be undefined');
+      throw new Error('Coordinates cannot be undefined or null')
     }
 
     // Convert degrees to radians

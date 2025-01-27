@@ -31,7 +31,7 @@ export class CreateDriverDto {
   document: string
   documentType: string
   picture?: string
-  currentLat: number
-  currentLon: number
+  currentLat?: number | null
+  currentLon?: number | null
   status?: DriverStatus
 }
