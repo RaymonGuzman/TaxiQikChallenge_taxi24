@@ -38,7 +38,7 @@ export class DriversService {
     // console.log(`latitude ${latitude}, longitude ${longitude}, distance = ${distance} limit ${limit}`);
 
     const drivers = await this.db.driver.findMany();
-    const filterDrivers= drivers.filter( driver => Geo.calculateDistance(latitude,longitude, driver.currentLat!, driver.currentLon!) < 3);
+    const filterDrivers= drivers.filter( driver => Geo.calculateDistance(latitude,longitude, driver.currentLat, driver.currentLon) < 3);
 
     // const mapDrivers = drivers.map( driver => ({...driver, valor:Geo.calcularDistancia(latitude,longitude, driver.currentLat!, driver.currentLon!)}));
     // console.log(mapDrivers);
