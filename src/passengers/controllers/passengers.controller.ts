@@ -1,9 +1,10 @@
-import { Controller, Post, Body, Get, Param, ParseIntPipe, Query, ParseEnumPipe } from '@nestjs/common'
+import { Controller, Post, Body, Get, Param, ParseIntPipe, Query, ParseEnumPipe, UseGuards } from '@nestjs/common'
 import { DriversService } from '../../drivers/services/drivers.service'
 import { CoordinatesValidationPipe } from '../../drivers/pipes/coordinates.pipe'
 import { PassengersService } from '../services/passengers.service'
 import { CreatePassengerDto } from '../../passengers/dtos/passenger.dto'
 import { CoordinatesQuery, CreateDriverDto } from '../../drivers/dtos/driver.dto'
+import { AuthGuard } from '../guards/auth/auth.guard'
 
 @Controller('passengers')
 export class PassengersController {
@@ -18,6 +19,7 @@ export class PassengersController {
         return { passengers }
       }
     
+      @UseGuards(AuthGuard)
       @Get('trip')
       async requestTrip(@Query(new CoordinatesValidationPipe()) coordinates: CoordinatesQuery) {
         const drivers = await this.driversService.findNearby(coordinates)
@@ -30,6 +32,7 @@ export class PassengersController {
         return { trip }
       }
 
+      @UseGuards(AuthGuard)
       @Post()
       async create(@Body() input: CreatePassengerDto) {
         const createPassenger = await this.passengersService.create({ ...input })
